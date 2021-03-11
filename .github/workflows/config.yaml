@@ -13,7 +13,9 @@ jobs:
         #node-version: [12.x, 14.x]
 
     runs-on: ubuntu-latest # windows-latest, macos-latest
-    container: circleci/openjdk:11-jdk # working_directory: /tmp/build
+    container:
+      image: circleci/openjdk:11-jdk # working_directory: /tmp/build
+      options: --user 1000
 
     steps:
     - name: Checkout Code
