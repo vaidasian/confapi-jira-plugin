@@ -18,27 +18,35 @@ jobs:
     steps:
     - name: Checkout Code
       uses: actions/checkout@v2
+
     - name: Set up JDK 1.8
       uses: actions/setup-java@v1
       with:
         java-version: 1.8
+
     #- name: Set up JDK 9.0.4 for x64
     #  uses: actions/setup-java@v1
     #  with:
     #    java-version: '9.0.4'
     #    architecture: x64
+
     - name: Cache Maven packages
       uses: actions/cache@v2
       with:
         path: ~/.m2
         key: confapi-plugin-${{ hashFiles('**/pom.xml') }}
         #restore-keys: confapi-plugin-
+
     - name: Download Dependencies
       run: ./mvnw dependency:go-offline -U -B
+
     - name: Build with Maven # Run the Maven verify phase
       run: mvn --batch-mode --update-snapshots verify # mvn -B package --file pom.xml # ./mvnw package -DskipUnitTests
-    - name: Stage and Upload
+
+    - name: Stage
       run: mkdir -p /tmp/artifacts && cp target/*.{jar,obr} /tmp/artifacts
+
+    - name: Upload
       uses: actions/upload-artifact@v2
       with:
         name: Package
