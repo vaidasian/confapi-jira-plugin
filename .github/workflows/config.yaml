@@ -32,13 +32,6 @@ jobs:
     #    java-version: '9.0.4'
     #    architecture: x64
 
-    - name: Cache Maven packages
-      uses: actions/cache@v2
-      with:
-        path: ~/.m2
-        key: confapi-plugin-${{ hashFiles('**/pom.xml') }}
-        #restore-keys: confapi-plugin-
-
     - name: Download Dependencies
       run: ./mvnw dependency:go-offline -U -B
 
@@ -53,3 +46,10 @@ jobs:
       with:
         name: Package
         path: /tmp/artifacts # /tmp/build
+
+    - name: Cache Maven packages
+      uses: actions/cache@v2
+      with:
+        path: ~/.m2
+        key: confapi-plugin-${{ hashFiles('**/pom.xml') }}
+        #restore-keys: confapi-plugin-
