@@ -33,6 +33,7 @@ jobs:
         path: ~/.m2
         key: confapi-plugin-${{ hashFiles('**/pom.xml') }}
         #restore-keys: confapi-plugin-
+    # Cache not found for input keys: confapi-plugin-6f449f1526bfe440e749d649933e3381800bf78fd1a725d570862d5bbaf8f2cb
 
     - name: Download Dependencies
       run: ./mvnw dependency:go-offline -U -B
@@ -46,7 +47,9 @@ jobs:
         pwd
         ls -la
         find . -name target
-        mkdir -p /tmp/artifacts && cp /target/*.{jar,obr} /tmp/artifacts
+        ls -la ./target
+        mkdir -p /tmp/artifacts && cp ./target/*.{jar,obr} /tmp/artifacts
+        ls -la ~/.m2
 
     - name: Upload
       uses: actions/upload-artifact@v2
