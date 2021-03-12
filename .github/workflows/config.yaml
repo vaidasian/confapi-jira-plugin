@@ -27,7 +27,7 @@ jobs:
     #    java-version: 1.8 # '9.0.4'
     #    # architecture: x64
 
-    - name: Cache Maven packages
+    - name: Cache Maven package
       uses: actions/cache@v2
       with:
         path: ~/.m2
