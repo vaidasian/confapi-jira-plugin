@@ -65,7 +65,6 @@ jobs:
         cp *.jar /tmp/artifacts
         cp *.obr /tmp/artifacts
         cd -
-    # find / -name confapi-plugin-
     # echo "DEBUG: mkdir -p /tmp/artifacts && cp target/*.{jar,obr} /tmp/artifacts"
     # cp: cannot stat './target/*.{jar,obr}': No such file or directory
 
