@@ -27,6 +27,14 @@ jobs:
     #    java-version: 1.8 # '9.0.4'
     #    # architecture: x64
 
+    - name: Find cache key
+      run: |
+        echo $M2_HOME
+        which maven
+        echo $JAVA_HOME
+        which java
+        find / -name .m2
+
     - name: Cache Maven packages
       uses: actions/cache@v2
       with:
@@ -37,6 +45,7 @@ jobs:
         #key: confapi-plugin-${{ hashFiles('**/pom.xml') }}
         #restore-keys: confapi-plugin-
     # Cache not found for input keys: confapi-plugin-6f449f1526bfe440e749d649933e3381800bf78fd1a725d570862d5bbaf8f2cb
+    # Post Cache Maven Step: /bin/tar --posix -z -cf cache.tgz -P -C /__w/confapi-jira-plugin/confapi-jira-plugin --files-from manifest.txt
 
     #- name: Make maven executable
     #  run: chmod +x ./mvnw
