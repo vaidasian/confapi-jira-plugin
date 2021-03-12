@@ -50,6 +50,7 @@ jobs:
         ls -la ./target
         mkdir -p /tmp/artifacts && cp ./target/*.{jar,obr} /tmp/artifacts
         ls -la ~/.m2
+        ls -la /
 
     - name: Upload
       uses: actions/upload-artifact@v2
