@@ -30,12 +30,16 @@ jobs:
     - name: Cache Maven packages
       uses: actions/cache@v2
       with:
-        path: ~/.m2
+        path: ~/.m2/repository
         key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
         restore-keys: ${{ runner.os }}-maven-
+    # Cache not found for input keys: Linux-maven-6f449f1526bfe440e749d649933e3381800bf78fd1a725d570862d5bbaf8f2cb, Linux-maven-
         #key: confapi-plugin-${{ hashFiles('**/pom.xml') }}
         #restore-keys: confapi-plugin-
     # Cache not found for input keys: confapi-plugin-6f449f1526bfe440e749d649933e3381800bf78fd1a725d570862d5bbaf8f2cb
+
+    #- name: Make maven executable
+    #  run: chmod +x ./mvnw
 
     - name: Download Dependencies
       run: ./mvnw dependency:go-offline -U -B
@@ -50,10 +54,8 @@ jobs:
         ls -la
         echo "DEBUG: ls -la ./target"
         ls -la ./target
-        echo "DEBUG: sudo find / -name .m2"
-        sudo find / -name .m2
-        echo "DEBUG: sudo ls -la /"
-        sudo ls -la /
+        echo "DEBUG: ls -la /"
+        ls -la /
         echo "DEBUG: mkdir -p /tmp/artifacts && cp /target/*.{jar,obr} /tmp/artifacts"
         mkdir -p /tmp/artifacts && cp /target/*.{jar,obr} /tmp/artifacts
     # cp: cannot stat './target/*.{jar,obr}': No such file or directory
