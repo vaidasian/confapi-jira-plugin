@@ -47,10 +47,15 @@ jobs:
         pwd
         ls -la
         find . -name target
+        echo "DEBUG: ls -la ./target"
         ls -la ./target
-        mkdir -p /tmp/artifacts && cp ./target/*.{jar,obr} /tmp/artifacts
+        echo "DEBUG: ls -la ~/.m2"
         ls -la ~/.m2
+        echo "DEBUG: ls -la /"
         ls -la /
+        echo "DEBUG: mkdir -p /tmp/artifacts && cp ./target/*.{jar,obr} /tmp/artifacts"
+        mkdir -p /tmp/artifacts && cp ./target/*.{jar,obr} /tmp/artifacts
+    # cp: cannot stat './target/*.{jar,obr}': No such file or directory
 
     - name: Upload
       uses: actions/upload-artifact@v2
