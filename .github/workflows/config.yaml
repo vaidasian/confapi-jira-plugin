@@ -49,15 +49,18 @@ jobs:
 
     - name: Stage
       run: |
-        echo "DEBUG: List directory"
+        echo "DEBUG: pwd && ls -la"
         pwd
         ls -la
-        echo "DEBUG: ls -la ./target"
-        ls -la ./target
         echo "DEBUG: ls -la /"
         ls -la /
-        echo "DEBUG: mkdir -p /tmp/artifacts && cp /target/*.{jar,obr} /tmp/artifacts"
-        mkdir -p /tmp/artifacts && cp /target/*.{jar,obr} /tmp/artifacts
+        echo "DEBUG: mkdir -p /tmp/artifacts && cp target/*.{jar,obr} /tmp/artifacts"
+        mkdir -p /tmp/artifacts
+        cd target
+        cp *.jar /tmp/artifacts
+        cp *.obr /tmp/artifacts
+        cd -
+        find / -name confapi-plugin-
     # cp: cannot stat './target/*.{jar,obr}': No such file or directory
 
     - name: Upload
