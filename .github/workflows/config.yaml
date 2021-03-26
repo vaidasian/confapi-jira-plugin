@@ -70,11 +70,12 @@ jobs:
     name: Test - Units, SonarCloud Scan
     needs: build
 
-    #runs-on: ubuntu-latest # ubuntu-18.04
-    #container:
-    #  image: github-actions:v1 # working_directory: /tmp/build # circleci/openjdk:11-jdk
-    #  options: --user 1001
+    runs-on: ubuntu-latest # ubuntu-18.04
+    container:
+      image: github-actions:v1 # working_directory: /tmp/build # circleci/openjdk:11-jdk
+      options: --user 1001
 
+    steps:
     - name: Cache Maven package
       uses: actions/cache@v2
       with:
@@ -116,6 +117,7 @@ jobs:
       image: github-actions:v1 # working_directory: /tmp/build # circleci/openjdk:11-jdk
       options: --user 1001
 
+    steps:
     - name: Cache Maven package
       uses: actions/cache@v2
       with:
@@ -140,6 +142,7 @@ jobs:
       image: github-actions:v1 # working_directory: /tmp/build # circleci/openjdk:11-jdk
       options: --user 1001
 
+    steps:
     - name: Cache Maven package
       uses: actions/cache@v2
       with:
@@ -170,6 +173,7 @@ jobs:
       image: github-actions:v1 # working_directory: /tmp/build # circleci/openjdk:11-jdk
       options: --user 1001
 
+    steps:
     - name: Cache Maven package
       uses: actions/cache@v2
       with:
