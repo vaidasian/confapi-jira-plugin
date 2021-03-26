@@ -86,7 +86,7 @@ jobs:
     - name: Restore
       uses: actions/download-artifact@v2
       with:
-        name: /tmp/artifacts # /tmp/build
+        name: Package # /tmp/build
 
     - name: Run Unit Tests and analyze on SonarCloud
       run: ./mvnw test sonar:sonar # mvn -B clean verify -Psonar -Dsonar.login=${{ secrets.SONAR_TOKEN }}
@@ -109,7 +109,7 @@ jobs:
         path: /tmp/artifacts # /tmp/build
 
   integration-tests:
-    name: Test - Integrations and SonarCloud
+    name: Test - Integrations
     needs: sonar
 
     runs-on: ubuntu-latest # ubuntu-18.04 # windows-latest, macos-latest
@@ -128,7 +128,7 @@ jobs:
     - name: Restore
       uses: actions/download-artifact@v2
       with:
-        name: /tmp/artifacts # /tmp/build
+        name: Package # /tmp/build
 
     - name: Run Integration Tests
       run: ./mvnw integration-test -DskipUnitTests -B
@@ -153,7 +153,7 @@ jobs:
     - name: Restore
       uses: actions/download-artifact@v2
       with:
-        name: /tmp/artifacts # /tmp/build
+        name: Package # /tmp/build
 
     - name: Decrypt Signing Key
       run: openssl aes-256-cbc -S ${SIGN_ASC_SALT} -K ${SIGN_ASC_KEY} -iv ${SIGN_ASC_IV} -in .circleci/sign.asc.enc -out .circleci/sign.asc -d
@@ -184,7 +184,7 @@ jobs:
     - name: Restore
       uses: actions/download-artifact@v2
       with:
-        name: /tmp/artifacts # /tmp/build
+        name: Package # /tmp/build
 
     - name: Download APCC
       run: ./mvnw dependency:get -DgroupId=de.aservo -DartifactId=atlassian-plugin-compatibility-check -Dversion=0.0.2
